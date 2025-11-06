@@ -26,7 +26,7 @@
             {{ session('success') }}
         </div>
         @endif
-
+        <h1>Usuarios</h1>  
         <div class="mainmenu">
             <li class="lista">
                 <ul><a href="archivos">Panel de usuario</a></ul>
