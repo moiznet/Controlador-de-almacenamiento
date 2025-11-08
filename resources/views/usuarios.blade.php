@@ -154,7 +154,7 @@
                                 <option value="Usuario">Usuario</option>
                                 <option value="Administrador">Administrador</option>
                             </select>
-                            <button type="submit">Create User</button>
+                            <button type="submit">Crear Usuario</button>
                         </form>
 
                         <h3>Usuarios Existentes</h3>
