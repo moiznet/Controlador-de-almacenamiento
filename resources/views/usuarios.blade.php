@@ -116,7 +116,7 @@
                     
                 </div>
         
-                <button id="closePopupBtn">Close</button>
+                <button id="closePopupBtn">Cerrar</button>
             </div>
         </div>
 

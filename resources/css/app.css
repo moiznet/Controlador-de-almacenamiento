@@ -394,3 +394,13 @@ select#role {
 input#groupcuota {
     margin-right: 10px;
 }
+.c_cuota h3 {
+    border-bottom: 1px solid gray;
+    padding: 11px 5px;
+}
+
+.popup-content {
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 10px;
+}
