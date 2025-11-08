@@ -56,7 +56,11 @@ Route::post('/borrar_usuario', [AdminController::class, 'borrarUsuario']);
 
 Route::post('/borrar_archivo', [FileController::class, 'borrarArchivo']); 
 
-Route::post('/edit_user_cuota', [AdminController::class, 'editUserCuota']); 
+Route::post('/edit_user_cuota', [AdminController::class, 'editUserCuota']);
+
+Route::post('/getrol', [AdminController::class, 'getRol']);
+
+
 
 Route::get('/', function () {
     return view('test');

@@ -13,6 +13,7 @@ class gruposc extends Model
 
         protected $fillable = [
             'nombre',
+            'cuota_grupo',
             'descripcion',
         ];
 }

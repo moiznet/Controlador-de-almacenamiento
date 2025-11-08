@@ -27,7 +27,7 @@
 
 
         @if (auth()->check())
-         
+         <input type="hidden" id="UserIdCurrent" name="UserIdCurrent" value="{{ auth()->id() }}">
         @else
             <script>window.location.href = "{{ route('login')}}"; </script>
         @endif
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </a>
-            <a href="usuarios">
+            <a href="usuarios" style="display: none;">
                 <div class="left">
                     <h1>Panel de administrador</h1>
                     <div class="svgs">
@@ -89,6 +89,84 @@
                 </div>
             @endif
         </div>    
-           
+    
+        
+        <script> 
+
+                            async function getrol(){
+
+                        const formData = new FormData();
+                         
+                         
+                        const UserIdCurrent = document.getElementsByName("UserIdCurrent");
+                        const UserIdCurrentValue = UserIdCurrent[0].value; 
+                        
+                        formData.append('user_id', UserIdCurrentValue);
+
+                        const inputElements = document.getElementsByName("_token");
+                        const csrfToken = inputElements[0].value;
+                        
+                        formData.append('_token', csrfToken);
+
+                        try {
+                            const response = await fetch('/getrol', { 
+                                method: 'POST',
+                                body: formData,
+
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+
+                            }
+                                const result = await response.json(); // Or response.text() depending on server response
+                                //console.log("get rol");
+                                //console.log(result[0].Role);
+                                if(result[0].Role  == 'Administrador'){
+
+                                    const myLink = document.querySelector('a[href="usuarios"]');
+                                    myLink.style.display = "block";
+
+                                }else{
+
+                                    const myLink = document.querySelector('a[href="usuarios"]');
+                                    const myLink2 = document.querySelector('a[href="archivos"]');
+                                    myLink.style.display = "none";
+                                    myLink2.style.margin = "auto";
+                                    myLink2.style.float = "none";
+
+               
+                                }
+                                return result ;
+                                
+                               // console.log('Get Grupos fue Exitoso:');
+                                //console.log(result);
+                               
+                                
+                                
+                             
+                        } catch (error) {
+                            console.error('Error during Get Grupos :', error);
+                            return null ;
+                        }
+
+
+                  
+
+
+                     
+                }
+
+                
+
+                document.addEventListener("DOMContentLoaded", function() {
+                 
+                    //console.log("DOM is fully loaded and parsed!");
+                    getrol();
+                 
+                });
+
+
+        </script>
     </body>
 </html>

@@ -25,10 +25,11 @@
         
     
         @if (auth()->check())
+        <input type="hidden" id="UserIdCurrent" name="UserIdCurrent" value="{{ auth()->id() }}">
             <div class="mainmenu">
                 <li class="lista">
                     <ul><a href="archivos">Panel de usuario</a></ul>
-                    <ul><a href="usuarios">Panel de administrador</a></ul>
+                    <ul><a href="usuarios" style="display: none;">Panel de administrador</a></ul>
                 </li>
             </div>
         @else
@@ -146,7 +147,7 @@
                         const filenemarr = file.name.split(".");
                         
 
-                        if(filenemarr[1] == "jpg" || filenemarr[1] == "png" || filenemarr[1] == "doc"  || filenemarr[1] == "docx" || filenemarr[1] == "xls" || filenemarr[1] == "xlsx" || filenemarr[1] == "xlsm" || filenemarr[1] == "svg" || filenemarr[1] == "txt" || filenemarr[1] == "pdf" ){
+                        if(filenemarr[1] == "jpg" || filenemarr[1] == "png" || filenemarr[1] == "doc"  || filenemarr[1] == "docx" || filenemarr[1] == "xls" || filenemarr[1] == "xlsx" || filenemarr[1] == "xlsm" || filenemarr[1] == "svg" || filenemarr[1] == "txt" || filenemarr[1] == "pdf"  || filenemarr[1] == "zip" ){
 
 
                         }else{
@@ -184,7 +185,7 @@
                             if (response.ok) {
                                 const result = await response.json(); // Or response.text() depending on server response
                                  
-                                
+                                console.log(result);
 
                                 const result4 = result.message.includes('Error');
                                 if(result4){
@@ -192,7 +193,7 @@
                                     alert(result.message);
 
                                 }else{
-
+                                     
                                     alert(result.message);
                                     window.location.reload(true);
                                 }
@@ -279,6 +280,72 @@
              
         }
 
+
+                async function getrol(){
+
+                        const formData = new FormData();
+                         
+                         
+                        const UserIdCurrent = document.getElementsByName("UserIdCurrent");
+                        const UserIdCurrentValue = UserIdCurrent[0].value; 
+                        
+                        formData.append('user_id', UserIdCurrentValue);
+
+                        const inputElements = document.getElementsByName("_token");
+                        const csrfToken = inputElements[0].value;
+                        
+                        formData.append('_token', csrfToken);
+
+                        try {
+                            const response = await fetch('/getrol', { 
+                                method: 'POST',
+                                body: formData,
+
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+
+                            }
+                                const result = await response.json(); // Or response.text() depending on server response
+                                //console.log("get rol");
+                                //console.log(result[0].Role);
+                                if(result[0].Role  == 'Administrador'){
+                                    const myLink = document.querySelector('a[href="usuarios"]');
+                                    myLink.style.display = "block";
+                                }else{
+
+                                    const myLink = document.querySelector('a[href="usuarios"]');
+                                    myLink.style.display = "none";
+                                }
+                                return result ;
+                                
+                               // console.log('Get Grupos fue Exitoso:');
+                                //console.log(result);
+                               
+                                
+                                
+                             
+                        } catch (error) {
+                            console.error('Error during Get Grupos :', error);
+                            return null ;
+                        }
+
+
+                  
+
+
+                     
+                }
+
+                
+
+                document.addEventListener("DOMContentLoaded", function() {
+                 
+                    //console.log("DOM is fully loaded and parsed!");
+                    getrol();
+                 
+                });
         
     </script> 
 

@@ -81,24 +81,25 @@ class AdminController extends Controller
         {
             
             $request->validate([
-                'nombre' => 'required|string|max:255|unique:grupos_tabla',
+                'nombre' => 'required|string|max:255',
                 'descripcion' => 'string|max:255',
             ]);
             
             
-
+            
              
              
 
             $gruposc = gruposc::create([
                 'nombre' => $request->nombre,
+                'cuota_grupo' => $request->cuota_grupo,
                 'descripcion' => $request->descripcion,
               
             ]);
 
 
             
-                return "Se creo el nuevo Grupo";
+                return $request->cuota_grupo;
                
         
         
@@ -115,6 +116,22 @@ class AdminController extends Controller
                 }
 
                 return response()->json($grupos_tabla);
+               
+        
+        
+        }
+
+        public function getRol(Request $request)
+        {
+             //return response()->json(['message' => 'found'], 200);
+
+            $products = DB::table('users')->join('user_roles', 'users.id', '=', 'user_roles.user')->select('users.id','user_roles.Role')->where('users.id', $request->user_id)->get(); 
+            
+                if (!$products) {
+                    return response()->json(['message' => 'User not found'], 404);
+                }
+
+                return response()->json($products);
                
         
         

@@ -61,6 +61,8 @@
     <body class="antialiased">
          
         @if (auth()->check())
+            
+            <input type="hidden" id="UserIdCurrent" name="UserIdCurrent" value="{{ auth()->id() }}">
             <div class="mainmenu">
                 <li class="lista">
                     <ul><a href="archivos">Panel de usuario</a></ul>
@@ -94,7 +96,7 @@
                     <form id="editCuota">
                         <label for="cuota">Cuota Usuario:</label>
                         <div class="inputcuota">
-                        <input id="cuota" name="cuota" type="number" step="50" min="0" max="800000" value="">
+                        <input id="cuota" name="cuota" type="number" step="1" min="0" max="800000" value="">
                         Kb
                         </div>
                     
@@ -207,6 +209,8 @@
                         <form id="creargrupo"  method="post">
                             <label for="groupname">Nombre de Grupo:</label>
                             <input type="text" id="groupname" name="groupname" required>
+                            <label for="groupcuota">Cuota de Grupo:</label>
+                            <div class="rang"><input id="groupcuota" name="groupcuota" type="number" step="1" min="0" max="800000" value="" required>Kb</div>
                             <label for="groupdescription">Descripción:</label>
                             <textarea id="groupdescription" name="groupdescription"></textarea>
                             <button type="submit">Crear Grupo</button>
@@ -217,6 +221,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre De Grupo</th>
+                                    <th>Cuota De Grupo</th>
                                     <th>Descripción</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -262,7 +267,7 @@
        <script>
 
 
-               async function getgrupos(){
+                async function getgrupos(){
 
                     
 
@@ -294,7 +299,7 @@
                   
 
 
-                    return "{'hola var'}";
+                     
                 }
 
 
@@ -318,6 +323,7 @@
                         newDiv.innerHTML = `
                         
                         <td>${item.nombre}</td>
+                        <td>${item.cuota_grupo} Kb</td>
                         <td>${item.descripcion}</td>
                 
                 <td>
@@ -337,17 +343,70 @@
                     
                 }
 
-                function doSomething() {
-                    DrawGrupoTable();
-                    // Your initialization code here
-                    }
-                    if (document.readyState === "loading") {
-                    // Loading hasn't finished yet
-                    document.addEventListener("DOMContentLoaded", doSomething);
-                    } else {
-                    // `DOMContentLoaded` has already fired
-                    doSomething();
+                async function getrol(){
+
+                        const formData = new FormData();
+                         
+                         
+                        const UserIdCurrent = document.getElementsByName("UserIdCurrent");
+                        const UserIdCurrentValue = UserIdCurrent[0].value; 
+                        
+                        formData.append('user_id', UserIdCurrentValue);
+
+                        const inputElements = document.getElementsByName("_token");
+                        const csrfToken = inputElements[0].value;
+                        
+                        formData.append('_token', csrfToken);
+
+                        try {
+                            const response = await fetch('/getrol', { 
+                                method: 'POST',
+                                body: formData,
+
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+
+                            }
+                                const result = await response.json(); // Or response.text() depending on server response
+                                //console.log("get rol");
+                                //console.log(result[0].Role);
+                                if(result[0].Role  == 'Administrador'){
+
+                                }else{
+
+                                    window.location.href = "{{ route('test')}}";
+                                }
+                                return result ;
+                                
+                               // console.log('Get Grupos fue Exitoso:');
+                                //console.log(result);
+                               
+                                
+                                
+                             
+                        } catch (error) {
+                            console.error('Error during Get Grupos :', error);
+                            return null ;
+                        }
+
+
+                  
+
+
+                     
                 }
+
+                
+
+                document.addEventListener("DOMContentLoaded", function() {
+                 
+                    //console.log("DOM is fully loaded and parsed!");
+                    DrawGrupoTable();
+                    getrol();
+                 
+                });
 
 
                 async function borrarGrupo(grupo_id){
@@ -533,12 +592,14 @@
                          
                          
                         const groupname = document.getElementsByName("groupname");
+                        const groupcuota = document.getElementsByName("groupcuota");
                         const groupdescription = document.getElementsByName("groupdescription");
                          
                         
-                        
+                         
                         const formData = new FormData();
                         formData.append('nombre', groupname[0].value);
+                        formData.append('cuota_grupo', groupcuota[0].value);
                         formData.append('descripcion', groupdescription[0].value);
                          
                         
@@ -565,7 +626,7 @@
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
                                 //console.log('se Creo el Grupo Exitosamente:');
-                                //console.log(result);
+                                console.log(result);
                                 const myForm = document.getElementById("creargrupo");
                                 myForm.reset();
                                 DrawGrupoTable();

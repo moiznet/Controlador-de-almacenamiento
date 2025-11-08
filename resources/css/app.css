@@ -385,3 +385,12 @@ select#role {
     font-size: 13px;
     border-radius: 9px;
 }
+.rang {
+    width: 100%;
+    float: left;
+    font-size: 21px;
+}
+
+input#groupcuota {
+    margin-right: 10px;
+}
