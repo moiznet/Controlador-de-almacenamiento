@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Files;
 use Illuminate\Support\Facades\DB; 
-
+use App\Models\userCuota;
 
 class FileController extends Controller
 {
@@ -29,7 +29,34 @@ class FileController extends Controller
         $fileName = $request->file('file')->getClientOriginalName();
         $fileExtension = $request->file('file')->getClientOriginalExtension();
         $fileSize = $request->file('file')->getSize();
+        $fileSizeKB = round($fileSize / 1024, 2);
         $userid = $request->input('userid');
+
+        //get User Cuota
+        $cuota_usuario = userCuota::where('user_id', $userid)->get();
+        $cuota_usuario_kb = $cuota_usuario[0]->couta_user;
+
+        //get espacio usado
+        $espacio_usado = DB::table('files_table')
+              ->where('userid', $userid)
+              ->sum('filesize');
+
+        //espacio usado + peso de archivo
+        $espacio_usado_mas_archivo = $espacio_usado + $fileSizeKB;
+
+        //si excede la Cuota
+        if($espacio_usado_mas_archivo > $cuota_usuario_kb ){
+
+            return response()->json(['message' => 'Error : Excede la Cuota de Almacenamiento' ], 200);
+        
+        }else{
+
+
+        }
+      
+        
+        
+         
 
 
         $currentTimestamp = time();
@@ -43,13 +70,13 @@ class FileController extends Controller
 
         $record = Files::create([
         'filename' => $fileNameToSave,
-        'filesize' => $fileSize,
+        'filesize' => $fileSizeKB,
         'userid' => $userid,
         'filetype' => $fileExtension
         ]);
 
 
-        return $userid;
+        return response()->json(['message' => 'Su Archivo Fue Guardado' ], 200);
         //return back()->with('success', 'File uploaded successfully! Path: ' . $path);
     }
 

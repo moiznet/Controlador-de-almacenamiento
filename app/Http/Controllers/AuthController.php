@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\user_roles;
 use App\Models\grupos;
+use App\Models\userCuota;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -79,6 +80,14 @@ class AuthController extends Controller
                 'user_id' => $newUserId,
               
             ]);
+
+            $user_roles = userCuota::create([
+                'user_id' => $newUserId,
+                'couta_user' => 20000,
+              
+            ]);
+
+            
 
             Auth::login($user);
  

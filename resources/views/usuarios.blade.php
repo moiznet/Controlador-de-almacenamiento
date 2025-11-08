@@ -88,6 +88,21 @@
                     </form>
                 </div>
 
+                <div class="c_cuota">
+                    <h3>Editar Cuota De Usuario</h3>
+
+                    <form id="editCuota">
+                        <label for="cuota">Cuota Usuario:</label>
+                        <div class="inputcuota">
+                        <input id="cuota" name="cuota" type="number" step="50" min="0" max="800000" value="">
+                        Kb
+                        </div>
+                    
+                    <button type="submit">Guardar Couta De Usuario</button>
+                    </form>
+                    
+                </div>
+
                 <div class="c_grupos">
                     <h3>Editar Grupos De Usuario</h3>
 
@@ -148,6 +163,7 @@
                                     <th>Email</th>
                                     <th>Rol</th>
                                     <th>Grupos</th>
+                                    <th>Couta</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -160,8 +176,10 @@
                                     <td>{{$product->email}}</td>
                                     <td>{{$product->Role}}</td>
                                     <td>{{$product->grupos}}</td>
+                                    <td>{{$product->couta_user}} Kb</td>
+                                    
                                     <td>
-                                        <button onclick="editUser({{$product->id}},'{{$product->name}}','{{$product->email}}','{{$product->Role}}','{property1,properti2}')" id="openPopupBtn" >Edit</button>
+                                        <button onclick="editUser({{$product->id}},'{{$product->name}}','{{$product->email}}','{{$product->Role}}','{property1,properti2}','{{$product->couta_user}}')" id="openPopupBtn" >Editar</button>
                                     
                                         @if ($product->id == 1)
                                         <button >Borrar (No S:Admin)</button>
@@ -284,6 +302,7 @@
 
                     //Get Grupos Tabla
                     const result1 = await getgrupos();
+                    
                     //console.log("Result 1:", result1); // Will log the fetched data or null
 
                     //draw table grupos
@@ -299,7 +318,7 @@
                         newDiv.innerHTML = `
                         
                         <td>${item.nombre}</td>
-                <td>${item.descripcion}</td>
+                        <td>${item.descripcion}</td>
                 
                 <td>
                      
@@ -436,7 +455,7 @@
                         }
                 }
 
-                async function editUser(user_id,name,email,Role,grupos){
+                async function editUser(user_id,name,email,Role,grupos,couta_user){
 
 
                      
@@ -445,6 +464,14 @@
                     //set the select
                     const dropdown = document.getElementById('edit_role'); 
                     dropdown.value = Role; 
+
+
+                    //set the couta_user
+                    const couta_user_input = document.getElementById('cuota'); 
+                    couta_user_input.value = couta_user; 
+
+
+                    
 
                     //set user on popup
                     const inputElement = document.getElementById('edit_user_role_id');
@@ -464,8 +491,10 @@
                         const newDiv = document.createElement('div');
 
                         // Add content to the div
-                        newDiv.innerHTML = `<input type="checkbox" id="${item.nombre}" name="gruposcheck" value="${item.nombre}">
-  <label for="${item.nombre}">${item.nombre}</label><br>`;
+                        newDiv.innerHTML = `
+                        <input type="radio" id="${item.nombre}" name="gruposcheck" value="${item.nombre}">
+                        
+                        <label for="${item.nombre}">${item.nombre}</label><br>`;
 
                         // Add a class for styling (optional)
                         newDiv.classList.add('item-group');
@@ -611,6 +640,61 @@
                     });
 
 
+                    //Peticion Editar Cuota de Usuario
+
+                    document.getElementById('editCuota').addEventListener('submit', async (event) => {
+                        
+                        event.preventDefault(); // Prevent default form submission
+                        
+                        
+                         
+                        const edit_user_role_id = document.getElementsByName("edit_user_role_id");
+                        const cuota_input = document.getElementsByName("cuota");
+                         
+                        
+                        
+                        const formData = new FormData();
+                        formData.append('user_id', edit_user_role_id[0].value);
+                        formData.append('couta_user', cuota_input[0].value);
+                         
+                        
+
+                        const inputElements = document.getElementsByName("_token");
+                        const csrfToken = inputElements[0].value;
+                        
+                        formData.append('_token', csrfToken);
+
+                       
+
+                        
+
+                        
+
+                        
+                            
+                        try {
+                            const response = await fetch('/edit_user_cuota', { 
+                                method: 'POST',
+                                body: formData,
+                            });
+
+                            if (response.ok) {
+                                const result = await response.text(); // Or response.text() depending on server response
+                                //console.log('Usuario editado Exitosamente:');
+                                //console.log(result);
+                                alert('Se edito el Usuario!');
+                                
+                            } else {
+                                console.error('Usuario Editado failed:', response.statusText);
+                                alert('Usuario Editado failed.');
+                            }
+                        } catch (error) {
+                            console.error('Error during Usuario Editado:', error);
+                            alert('An error occurred during Usuario Editado.');
+                        }
+
+
+                    });
 
                     // peticion Crear Usuario desde administrador
                     document.getElementById('createForm').addEventListener('submit', async (event) => {
@@ -685,8 +769,16 @@
                         
                         event.preventDefault(); // Prevent default form submission
                         
-                        const checkedCheckboxes = document.querySelectorAll('input[name="gruposcheck"]:checked');
-                         const selectedValues = Array.from(checkedCheckboxes).map(checkbox => checkbox.value);
+
+                        const selectedRadio = document.querySelector('input[name="gruposcheck"]:checked');
+                        if (selectedRadio) {
+                             
+                        } else {
+                            alert("Primero,Seleccione el grupo");
+                            return null; // No radio button is selected
+                        }
+                         
+                         const selectedValues = selectedRadio.value;
                          //console.log(selectedValues);
                         const edit_user_role_id = document.getElementsByName("edit_user_role_id");
                                            

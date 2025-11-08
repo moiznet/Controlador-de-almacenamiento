@@ -139,7 +139,7 @@
                         const file = fileInput.files[0]; // Get the selected file
 
                         if (!file) {
-                            alert('Please select a file to upload.');
+                            alert('Por favor selecione un archivo para cargar.');
                             return;
                         }
                      
@@ -154,6 +154,8 @@
                             alert("Tipo De Archivo No Valido");
                             return;
                         }
+
+
                         
 
                         const formData = new FormData();
@@ -180,12 +182,24 @@
                             });
 
                             if (response.ok) {
-                                const result = await response.text(); // Or response.text() depending on server response
+                                const result = await response.json(); // Or response.text() depending on server response
                                  
-                                //console.log(result);
-                                window.location.reload(true);
+                                
+
+                                const result4 = result.message.includes('Error');
+                                if(result4){
+
+                                    alert(result.message);
+
+                                }else{
+
+                                    alert(result.message);
+                                    window.location.reload(true);
+                                }
+                                
                             } else {
-                                console.error('File upload failed:', response.statusText);
+                                
+                                console.error('File upload failed:', response);
                                 alert('File upload failed.');
                             }
                         } catch (error) {

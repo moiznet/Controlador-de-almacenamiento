@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\user_roles;
 use App\Models\gruposc;
 use App\Models\grupos;
+use App\Models\userCuota;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;  
 class AdminController extends Controller
@@ -45,6 +46,12 @@ class AdminController extends Controller
               
             ]);
 
+            $user_roles = userCuota::create([
+                'user_id' => $newUserId,
+                'couta_user' => 20000,
+              
+            ]);
+
 
             
                 return "Usuario Creado con id".$newUserId;
@@ -56,13 +63,6 @@ class AdminController extends Controller
         public function editUserRol(Request $request)
         {
             
-            
-            
-
-            
-              
-
-            
 
             $user_roles = user_roles::updateOrCreate(
                 ['user' => $request->edit_user_role_id], // Constraints to find the record
@@ -72,8 +72,7 @@ class AdminController extends Controller
 
             
                 return "Usuario Creado con id";
-               
-        
+
         
         }
 
@@ -126,10 +125,6 @@ class AdminController extends Controller
             
             
             
-
-            
-              
-
             
 
             $user_grupos = grupos::updateOrCreate(
@@ -139,7 +134,27 @@ class AdminController extends Controller
 
 
             
-                return "Usuario Creado con id";
+                return "Usuario Editado con id";
+               
+        
+        
+        }
+
+                public function editUserCuota(Request $request)
+        {
+            
+            
+             
+            
+
+            $user_grupos = userCuota::updateOrCreate(
+                ['user_id' => $request->user_id], // Constraints to find the record
+                ['couta_user' => $request->couta_user] // Values to update or create with
+            );
+
+
+            
+                return "Usuario Editado con id";
                
         
         
