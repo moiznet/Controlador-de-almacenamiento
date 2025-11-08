@@ -261,7 +261,7 @@
                                 const result = await response.json(); // Or response.text() depending on server response
                                 return result ;
                                 
-                                console.log('Get Grupos fue Exitoso:');
+                               // console.log('Get Grupos fue Exitoso:');
                                 //console.log(result);
                                
                                 
@@ -284,7 +284,7 @@
 
                     //Get Grupos Tabla
                     const result1 = await getgrupos();
-                    console.log("Result 1:", result1); // Will log the fetched data or null
+                    //console.log("Result 1:", result1); // Will log the fetched data or null
 
                     //draw table grupos
 
@@ -367,8 +367,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('se Borro el Grupo Exitosamente:');
-                                console.log(result);
+                                //console.log('se Borro el Grupo Exitosamente:');
+                                //console.log(result);
                                 const myForm = document.getElementById("creargrupo");
                                  
                                 DrawGrupoTable();
@@ -420,8 +420,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('se Borro el usuario Exitosamente:');
-                                console.log(result);
+                                //console.log('se Borro el usuario Exitosamente:');
+                                //console.log(result);
                                
                                  window.location.reload(true);
                                 
@@ -452,7 +452,7 @@
  
                     //Get Grupos Tabla
                     const result1 = await getgrupos();
-                    console.log("Result 1:", result1); // Will log the fetched data or null
+                    //console.log("Result 1:", result1); // Will log the fetched data or null
 
                     //draw table grupos
 
@@ -535,8 +535,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('se Creo el Grupo Exitosamente:');
-                                console.log(result);
+                                //console.log('se Creo el Grupo Exitosamente:');
+                                //console.log(result);
                                 const myForm = document.getElementById("creargrupo");
                                 myForm.reset();
                                 DrawGrupoTable();
@@ -594,8 +594,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('Usuario editado Exitosamente:');
-                                console.log(result);
+                                //console.log('Usuario editado Exitosamente:');
+                                //console.log(result);
                                 alert('Se edito el Usuario!');
                                 
                             } else {
@@ -659,8 +659,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('Usuario Creado Exitosamente:');
-                                console.log(result);
+                                //console.log('Usuario Creado Exitosamente:');
+                                //console.log(result);
                                 const myForm = document.getElementById("createForm");
                                 myForm.reset();
                                 window.location.reload(true);
@@ -717,8 +717,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('Usuario editado Exitosamente:');
-                                console.log(result);
+                                //console.log('Usuario editado Exitosamente:');
+                                //console.log(result);
                                 alert('Se edito el Usuario!');
                                 
                             } else {

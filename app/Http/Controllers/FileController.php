@@ -18,7 +18,7 @@ class FileController extends Controller
     {
         // 1. Validate the uploaded file
         $request->validate([
-            'file' => 'required|mimes:jpg,png,pdf,txt|max:2048', // Example validation rules
+            'file' => 'required|mimes:jpg,png,doc,docx,xls,xlsx,xlsm,svg,txt,pdf|max:2048', // Example validation rules
         ]);
 
         // 2. Store the file

@@ -356,3 +356,32 @@ select#role {
     overflow: visible;
     height: 227px;
 }
+#editRole label {
+    width: 50% !important;
+    float: left;
+}
+
+#editRole select {max-width: 50%;float: left;margin-left: 10px;text-align: center;border-radius: 5px;padding: 8px;border: 1px solid gray;width: 35%;margin-top: 5px;}
+
+.c_role h3 {
+    border-bottom: 1px solid gray;
+    padding: 11px 5px;
+}
+
+.c_grupos h3 {
+    border-bottom: 1px solid gray;
+    padding: 11px 5px;
+    margin-top: 30px;
+}
+
+#container_div .item-group {
+    background-color: #f7f2f2;
+    width: 24%;
+    float: left;
+    margin-left: 1%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: visible;
+    font-size: 13px;
+    border-radius: 9px;
+}

@@ -17,6 +17,12 @@
 
 </head>
 <body>
+
+        @if (auth()->check())
+         <script>window.location.href = "{{ route('test')}}"; </script>
+        @else
+             
+        @endif
         <div class="littelmenu">
             @if (Route::has('login'))
                 <div class="menu1">

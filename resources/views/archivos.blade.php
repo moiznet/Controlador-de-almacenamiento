@@ -130,7 +130,7 @@
         window.Laravel = window.Laravel || {}; // Ensure window.Laravel exists
         window.Laravel.userId = {{ optional(auth()->user())->id }};
         
-        console.log(window.Laravel.userId);
+        //console.log(window.Laravel.userId);
 
                      document.getElementById('uploadForm').addEventListener('submit', async (event) => {
                         
@@ -142,6 +142,19 @@
                             alert('Please select a file to upload.');
                             return;
                         }
+                     
+                        const filenemarr = file.name.split(".");
+                        
+
+                        if(filenemarr[1] == "jpg" || filenemarr[1] == "png" || filenemarr[1] == "doc"  || filenemarr[1] == "docx" || filenemarr[1] == "xls" || filenemarr[1] == "xlsx" || filenemarr[1] == "xlsm" || filenemarr[1] == "svg" || filenemarr[1] == "txt" || filenemarr[1] == "pdf" ){
+
+
+                        }else{
+
+                            alert("Tipo De Archivo No Valido");
+                            return;
+                        }
+                        
 
                         const formData = new FormData();
                         formData.append('file', file); // 'fileToUpload' should match the name attribute in the HTML input
@@ -169,7 +182,7 @@
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
                                  
-                                console.log(result);
+                                //console.log(result);
                                 window.location.reload(true);
                             } else {
                                 console.error('File upload failed:', response.statusText);
@@ -235,8 +248,8 @@
 
                             if (response.ok) {
                                 const result = await response.text(); // Or response.text() depending on server response
-                                console.log('se Borro el archivo Exitosamente:');
-                                console.log(result);
+                                //console.log('se Borro el archivo Exitosamente:');
+                                //console.log(result);
                                
                                  window.location.reload(true);
                                 
