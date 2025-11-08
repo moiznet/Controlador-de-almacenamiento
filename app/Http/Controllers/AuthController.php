@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\user_roles;
+use App\Models\grupos;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -42,6 +44,7 @@ class AuthController extends Controller
         {
             return view('auth.register'); // Assuming you have a login Blade view
         }
+        
         public function register(Request $request)
         {
             $request->validate([
@@ -54,6 +57,27 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+            ]);
+
+
+            $newUserId = $user->id;
+            $role ="";
+            if ($newUserId == 1) {
+                $role = 'Administrador';
+            } else {
+                 $role = 'Usuario';
+            }
+
+            $user_roles = user_roles::create([
+                'Role' => $role,
+                'user' => $newUserId,
+              
+            ]);
+
+            $user_roles = grupos::create([
+                'grupos' => null,
+                'user_id' => $newUserId,
+              
             ]);
 
             Auth::login($user);

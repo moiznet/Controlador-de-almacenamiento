@@ -4,6 +4,8 @@
  
 use App\Http\Controllers\AuthController; // Or App\Http\Controllers\Auth\AuthController
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,10 +37,27 @@ Route::get('/usuarios', [AppController::class, 'ShowUsuarios'])->name('usuarios'
 
  
 
+Route::post('/upload', [FileController::class, 'uploadFile']);
 
+
+Route::post('/create_user', [AdminController::class, 'createUser']);
+
+Route::post('/edit_user_rol', [AdminController::class, 'editUserRol']);
+
+Route::post('/crear_grupo', [AdminController::class, 'crearGrupo']);
+
+Route::get('/get_grupos', [AdminController::class, 'getGrupos']);
+
+Route::post('/edit_user_grupos', [AdminController::class, 'editUserGrupos']);
+
+Route::post('/borrar_grupo', [AdminController::class, 'borrarGrupo']);
+
+Route::post('/borrar_usuario', [AdminController::class, 'borrarUsuario']);
+
+Route::post('/borrar_archivo', [FileController::class, 'borrarArchivo']); 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('test');
 });
 Route::get('/test', function () {
     return view('test');

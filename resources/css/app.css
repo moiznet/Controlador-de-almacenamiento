@@ -1,0 +1,358 @@
+ 
+body {
+    background-color: #ffffff;
+                font-family: 'Nunito', sans-serif;
+            }
+            
+        .file-manager-container { max-width: 800px; margin: auto; border: 1px solid #ddd; padding: 20px; }
+        .file-list { margin-top: 20px; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .file-item:last-child { border-bottom: none; }
+        .file-name { flex-grow: 1; }
+        .file-actions button { margin-left: 5px; padding: 5px 10px; cursor: pointer; }
+        .upload-section { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+
+body {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.mainmenu {
+    float: left;
+    width: 100%;
+}
+
+li.lista {
+    float: left;
+    overflow: auto;
+    display: inline;
+    width: 100%;
+}
+
+.lista ul {
+    float: left;
+}
+ .littelmenu {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 15px;
+}
+
+.mainmenu {
+    text-decoration: none !important;
+}
+
+.lista ul {
+    text-decoration: none !important;
+}
+
+ul a {
+    font-size: 16px;
+    text-decoration: none !important;
+    color: #373636;
+}
+
+a.item {
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #555252;
+}
+
+ul a:hover {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.container_login {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.login_form {
+    box-shadow: 10px 8px 14px -6px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 8px 14px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 14px -6px rgba(0,0,0,0.75);
+    margin: 0 auto;
+    width: 320px;
+    padding: 35px 7px;
+    padding-bottom: 71px !important;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid lightslategray;
+}
+
+form div {
+    width: 100%;
+    margin-top: 10px;
+}
+
+div label {
+    width: 100%;
+    display: block;
+    margin: 0px auto;
+    padding: 10px 0px;
+}
+
+ 
+
+div input {
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid gray;
+}
+
+button {
+    margin-top: 24px;
+    padding: 9px 74px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+button:hover {
+    font-weight: bold;
+}
+
+h1 {
+    color: #515253;
+    width: 100%;
+    text-align: center;
+}
+
+.bigbotons {
+    width: 44%;
+    height: 264px;
+    margin-top: 8%;
+    margin: 19vh auto;
+}
+
+.bigbotons a {
+    width: 43%;
+    display: block;
+    float: left;
+    padding: 3% 1%;
+    margin: 1px 2%;
+    border: 1px solid gray;
+    border-radius: 15px;
+}
+
+.left {
+    float: left;
+    text-align: center;
+    width: 100%;
+    padding: 0px;
+    box-sizing: content-box;
+    display: block;
+}
+
+.left .svgs {
+    max-width: 160px;
+    height: 137px;
+    text-align: center;
+    float: none;
+    margin: auto;
+}
+
+.svgs svg {
+    width: 82%;
+    float: none;
+    height: 139px;
+    margin: auto 0;
+}
+
+left h1 {
+    font-size: 10px !important;
+    display: block;
+}
+
+.left h1 {
+    font-size: 19px;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 64px;
+}
+
+.bigbotons a:hover {
+    font-weight: bold;
+    box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+}
+
+.container_filemanager {
+    float: left;
+    width: 100%;
+    padding-top: 2vh;
+}
+
+li.lista {
+    border-bottom: 1px solid #cbd1d7;
+}
+
+.file-manager-container {
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+}
+
+ 
+
+h3 {
+    color: #515253;
+}
+
+span.file-size {
+    text-align: center;
+}
+html {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+h1 {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+h2 {
+    float: left;
+    width: 100%;
+    color: #515253;
+}
+
+.users_config {
+    float: left;
+    width: 100%;
+    
+    overflow: visible;
+}
+
+.user_config_container {
+    width: 85%;
+    float: none;
+    padding: 27px;
+    margin: auto;
+    border: 1px solid gray;
+    border-radius: 10px;
+    box-shadow: 10px 8px 14px -10px #000000bf;
+    -webkit-box-shadow: 10px 8px 14px -10px rgba(0, 0, 0, .75);
+    -moz-box-shadow: 10px 8px 14px -10px rgba(0,0,0,.75);
+    box-sizing: border-box;
+}
+
+.user_config_container h2 {
+    float: left;
+    width: 100%;
+     
+}
+
+.user_config_container h3 {
+    float: left;
+    width: 100%;
+     
+}
+
+.inner_config {
+    float: left;
+    width: 100%;
+    overflow: auto;
+    padding: 10px 2%;
+    box-sizing: border-box;
+}
+
+.user_config_container {
+    overflow: auto;
+    margin-bottom: 1vh;
+}
+
+h2 {}
+
+.user_config_container h2 {
+    border-bottom: 1px solid gray;
+}
+
+.inner_config h3 {
+    border-bottom: 1px solid lightgray;
+    margin-top: 7vh;
+}
+
+#createForm label {
+    max-width: 50%;
+    float: left;
+    margin-left: 10px;
+}
+
+#createForm input {
+    max-width: 50%;
+    float: left;
+    margin-left: 10px;
+}
+
+select#role {
+    max-width: 50%;
+    float: left;
+    margin-left: 10px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    border: 1px solid gray;
+    width: 24%;
+}
+
+#createForm button {
+    width: 96%;
+    margin-left: 1%;
+}
+
+#createForm button:hover {
+    box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 8px 14px -10px rgba(0,0,0,0.75);
+}
+
+.inner_config td {
+    background-color: #f7f2f2;
+    padding: 7px;
+    box-sizing: border-box;
+    margin: 5px 3px;
+    font-size: 15px;
+}
+
+.inner_config td button {
+    width: 95%;
+    padding: 7px;
+    margin-top: 3px;
+}
+
+.inner_config tr {
+    border-bottom: 1px solid gray;
+}
+
+#creargrupo label {
+    float: left;
+    width: 100%;
+}
+
+#creargrupo  input {
+    float: left;
+    width: 39%;
+}
+
+#creargrupo button {
+    display: block;
+}
+
+#creargrupo textarea {
+    width: 40%;
+    height: 60px;
+}
+
+.bigbotons a {
+    overflow: visible;
+    height: 227px;
+}
